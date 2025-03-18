@@ -17,9 +17,9 @@ allow streamlit commands, use: python -m streamlit run <path to main.py>.
 Packages used in this program (not necessarily exhaustive):
 - streamlit
 - langchain
-    - -community
-    - -google-genai
-    - -core
+    - _community
+    - _google_genai
+    - _core
 - protobuf
 - faiss-cpu
 - tiktoken
