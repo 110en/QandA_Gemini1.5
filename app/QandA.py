@@ -32,7 +32,17 @@ def get_chain_ans(llm, embed, query):
     prompt.format(context = vbase)
     qa = create_stuff_documents_chain(llm, prompt)
     chain = create_retrieval_chain(retrieve, qa)
-    return chain.invoke({"input" : query})["answer"]
+    qanda = chain.invoke({"input" : query})["answer"]
+    prompt = PromptTemplate.from_template(
+        """
+        Given the following question and answer:
+        {question}
+        rephrase the question so that it is in the form of a statement. Be sure to include the answer somewhere in the sentence.
+        Return a SINGLE sentence. NO PREAMBLE.
+        """
+    ) 
+    ans = llm.invoke(prompt.format_prompt(question = qanda)).content
+    return ans
 
 def make_vars():
     os.environ["GOOGLE_API_KEY"] = (str)(os.getenv("GOOGLE_API_KEY") )
