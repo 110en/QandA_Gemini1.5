@@ -17,7 +17,7 @@ def make_vec_db(embed):
     vbase = FAISS.from_documents(documents = data, embedding = embed)
     vbase.save_local("faiss_db")
 
-def get_chain(embed):
+def get_chain_ans(embed):
     query = input("Please type your question regarding flowers, then press enter: ")
     vbase = FAISS.load_local("faiss_db", embed)
     retrieve = vbase.as_retriever()
