@@ -37,4 +37,13 @@ prompt.format(context = vbase)
 qa = create_stuff_documents_chain(llm, prompt)
 chain = create_retrieval_chain(retrieve, qa)
 ans = chain.invoke({"input" : query})
+prompt = PromptTemplate.from_template(
+        """
+        Given the following question and answer:
+        {question}
+        rephrase the question so that it is in the form of a statement. Be sure to include the answer somewhere in the sentence.
+        Return a SINGLE sentence. NO PREAMBLE.
+        """
+) 
+print(llm.invoke(prompt.format_prompt(question = ans)))
 #print(ans)
