@@ -15,4 +15,5 @@ if question:
     
 
 if vdb:
-    make_vec_db()
+    _, embed = make_vars()
+    make_vec_db(embed)
