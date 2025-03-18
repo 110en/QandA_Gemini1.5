@@ -18,7 +18,7 @@ def make_vec_db(embed):
     vbase.save_local("faiss_db")
 
 def get_chain_ans(llm, embed, query):
-    vbase = FAISS.load_local("faiss_db", embed)
+    vbase = FAISS.load_local("faiss_db", embed, allow_dangerous_deserialization = True)
     retrieve = vbase.as_retriever()
     prompt = PromptTemplate.from_template(
         """
@@ -32,7 +32,7 @@ def get_chain_ans(llm, embed, query):
     prompt.format(context = vbase)
     qa = create_stuff_documents_chain(llm, prompt)
     chain = create_retrieval_chain(retrieve, qa)
-    return chain.invoke({"input" : query})
+    return chain.invoke({"input" : query})["answer"]
 
 def make_vars():
     os.environ["GOOGLE_API_KEY"] = (str)(os.getenv("GOOGLE_API_KEY") )
