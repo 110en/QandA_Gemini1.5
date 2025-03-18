@@ -3,7 +3,7 @@ from QandA import make_vars, get_chain_ans, make_vec_db
 
 st.title("Fun Flower Facts Q&A")
 
-question = st.text_input("Question: ", value = "Type a question regarding flowers, then press enter")
+question = st.text_input("Question: ")
 
 vdb = st.button("Create DB")
 
