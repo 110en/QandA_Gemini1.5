@@ -2,7 +2,10 @@ import streamlit as st
 from QandA import make_vars, get_chain_ans, make_vec_db
 
 st.title("Fun Flower Facts Q&A")
+
 question = st.text_input("Question: ", value = "Type a question regarding flowers, then press enter")
+
+vdb = st.button("Create DB")
 
 if question:
     llm, embed = make_vars()
@@ -10,3 +13,6 @@ if question:
     st.header("Answer: ")
     st.write(ans)
     
+
+if vdb:
+    make_vec_db()
