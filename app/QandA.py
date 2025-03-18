@@ -35,13 +35,10 @@ def get_chain(embed):
     chain = create_retrieval_chain(retrieve, qa)
     return chain.invoke({"input" : query})
 
-if __name__ == "__main__":
+def make_vars():
     os.environ["GOOGLE_API_KEY"] = (str)(os.getenv("GOOGLE_API_KEY") )
     if "GOOGLE_API_KEY" not in os.environ:
         os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter Google API key: ")
     llm = ChatGoogleGenerativeAI(model = "gemini-1.5-pro-002", temperature = 0.1)
     embed = GoogleGenerativeAIEmbeddings(model = "models/text-embedding-004")
-    create_db = input("Would you like to create the vector database? Type 1 for yes and 0 for no, then press enter: ")
-    if (create_db == 1):
-        make_vec_db(embed)
-    get_chain(embed)
+    return llm, embed
