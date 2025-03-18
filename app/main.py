@@ -44,4 +44,4 @@ if __name__ == "__main__":
     create_db = input("Would you like to create the vector database? Type 1 for yes and 0 for no, then press enter: ")
     if (create_db == 1):
         make_vec_db(embed)
-    chain = get_chain(embed)
+    get_chain(embed)
